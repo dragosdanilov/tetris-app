@@ -54,13 +54,39 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(randomRotation)
     let currentTetromino = theTetrominoes[randomTetromino][randomRotation];
 
+    // draw the tetromino
     function draw() {
         currentTetromino.forEach(index => {
             squares[currentGridPosition + index].classList.add('tetromino')
         })
     }
 
-    draw()
+    // undraw the tetromino
+    function undraw() {
+        currentTetromino.forEach(index => {
+            squares[currentGridPosition + index].classList.remove('tetromino')
+        })
+    }
 
-    console.log(squares)
+    // make the tetromino move down every second
+    timerId = setInterval(moveDown, 1000)
+
+    // move down function
+    function moveDown() {
+        undraw()
+        currentGridPosition += width;
+        draw()
+        freeze()
+    }
+
+    function freeze() {
+        if(currentTetromino.some(index => squares[currentGridPosition + index + width].classList.contains('taken'))) {
+            currentTetromino.forEach(index => squares[currentGridPosition + index].classList.add('taken'))
+        // start a new tetromino falling
+        randomTetromino = Math.floor(Math.random() * theTetrominoes.length);
+        currentTetromino = theTetrominoes[randomTetromino][randomRotation];
+        currentGridPosition = 4
+        draw()
+        }
+    }
 })
