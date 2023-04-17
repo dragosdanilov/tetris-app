@@ -71,6 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // make the tetromino move down every second
     timerId = setInterval(moveDown, 1000)
 
+    // assign functions to key codes
+    function control(e) {
+        if(e.keyCode === 37) {
+            moveLeft()
+        } else if (e.keyCode === 38) {
+          // rotate
+        } else if (e.keyCode === 39) {
+            moveRight()
+        } else if (e.keyCode === 40) {
+            moveDown()
+        }
+    }
+    document.addEventListener('keyup', control)
+
     // move down function
     function moveDown() {
         undraw()
@@ -82,11 +96,48 @@ document.addEventListener('DOMContentLoaded', () => {
     function freeze() {
         if(currentTetromino.some(index => squares[currentGridPosition + index + width].classList.contains('taken'))) {
             currentTetromino.forEach(index => squares[currentGridPosition + index].classList.add('taken'))
-        // start a new tetromino falling
-        randomTetromino = Math.floor(Math.random() * theTetrominoes.length);
-        currentTetromino = theTetrominoes[randomTetromino][randomRotation];
-        currentGridPosition = 4
-        draw()
+            // start a new tetromino falling
+            randomTetromino = Math.floor(Math.random() * theTetrominoes.length);
+            currentTetromino = theTetrominoes[randomTetromino][randomRotation];
+            currentGridPosition = 4
+            draw()
         }
+    }
+
+    // move the tetromino left 
+    // unless is at the edge of the grid or there is a blockage
+
+    function moveLeft() {
+        undraw()
+        const isAtLeftEdge = currentTetromino.some(index => (currentGridPosition + index) % width === 0);
+
+        if (!isAtLeftEdge) {
+            currentGridPosition -= 1;
+        }
+
+        if (currentTetromino.some(index => squares[currentGridPosition + index].classList.contains('taken'))) {
+            currentGridPosition += 1
+        }
+
+        draw()
+    }
+
+    // move the tetromino left 
+    // unless is at the edge of the grid or there is a blockage
+
+    function moveRight() {
+        undraw()
+        const isAtRightEdge = currentTetromino.some(index =>
+        (currentGridPosition + index) % width === width - 1)
+
+        if (!isAtRightEdge) {
+            currentGridPosition += 1
+        }
+
+        if (currentTetromino.some(index => squares[currentGridPosition + index].classList.contains('taken'))) {
+            currentGridPosition -= 1
+        }
+
+        draw()
     }
 })
