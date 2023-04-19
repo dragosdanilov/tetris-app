@@ -44,15 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
     let currentGridPosition = 4;
+    let currentGridRotation = 0;
 
     // randomly select a tetromino and its first rotation
-    let randomTetromino = Math.floor(Math.random()*theTetrominoes.length);
-    // 4 possible rotations
-    let randomRotation = Math.floor(Math.random()*4);
+    let random = Math.floor(Math.random()*theTetrominoes.length);
 
-    console.log(randomTetromino)
-    console.log(randomRotation)
-    let currentTetromino = theTetrominoes[randomTetromino][randomRotation];
+    console.log(random)
+    console.log(currentGridRotation)
+    let currentTetromino = theTetrominoes[random][currentGridRotation];
 
     // draw the tetromino
     function draw() {
@@ -97,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if(currentTetromino.some(index => squares[currentGridPosition + index + width].classList.contains('taken'))) {
             currentTetromino.forEach(index => squares[currentGridPosition + index].classList.add('taken'))
             // start a new tetromino falling
-            randomTetromino = Math.floor(Math.random() * theTetrominoes.length);
-            currentTetromino = theTetrominoes[randomTetromino][randomRotation];
+            random = Math.floor(Math.random() * theTetrominoes.length);
+            currentTetromino = theTetrominoes[random][currentGridRotation];
             currentGridPosition = 4
             draw()
         }
@@ -140,4 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         draw()
     }
+
+    // rotate the tetromino
+    // function rotate() [
+    //     undraw()
+    //     currentGridRotation
+    // ]
 })
