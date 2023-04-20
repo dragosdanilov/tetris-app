@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     let squares = Array.from(document.querySelectorAll('.grid div'));
-    const ScoreDisplay = document.querySelector('#score');
-    const StartButton = document.querySelector('#start-button');
+    const scoreDisplay = document.querySelector('#score');
+    const startButton = document.querySelector('#start-button');
     const width = 10;
+    let nextRandom = 0;
 
     // The Tetrominoes
     const lTetromino = [
@@ -49,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // randomly select a tetromino and its first rotation
     let random = Math.floor(Math.random()*theTetrominoes.length);
 
-    console.log(random)
-    console.log(currentGridRotation)
     let currentTetromino = theTetrominoes[random][currentGridRotation];
 
     // draw the tetromino
@@ -96,10 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if(currentTetromino.some(index => squares[currentGridPosition + index + width].classList.contains('taken'))) {
             currentTetromino.forEach(index => squares[currentGridPosition + index].classList.add('taken'))
             // start a new tetromino falling
-            random = Math.floor(Math.random() * theTetrominoes.length);
+            random = nextRandom;
+            nextRandom = Math.floor(Math.random() * theTetrominoes.length);
             currentTetromino = theTetrominoes[random][currentGridRotation];
             currentGridPosition = 4
             draw()
+            displayShape()
         }
     }
 
@@ -150,4 +151,30 @@ document.addEventListener('DOMContentLoaded', () => {
         currentTetromino = theTetrominoes[random][currentGridRotation]
         draw()
     }
+
+    // show up-next tetromino in mini-grid
+    const displaySquares = document.querySelectorAll('.mini-grid div');
+    const displayWidth = 4;
+    const displayIndex = 0;
+
+    // the tetrominoes without rotations
+    const upNextTetrominoes = [
+        [1, displayWidth+1, displayWidth*2+1, 2], //lTetromino
+        [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino
+        [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
+        [0, 1, displayWidth, displayWidth+1], //oTetromino
+        [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1], //iTetromino
+    ]
+
+    // display the shape in the mini-grid display
+    function displayShape() {
+        // remove any trace of a tetromino from the entire grid
+        displaySquares.forEach(square => {
+            square.classList.remove('tetromino')
+        })
+        upNextTetrominoes[nextRandom].forEach(index => {
+            displaySquares[displayIndex + index].classList.add('tetromino')
+        })
+    }
+
 })
