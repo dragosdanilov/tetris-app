@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     const colors = [
         'orange',
+        'pink',
         'red',
         'purple',
         'green',
@@ -16,11 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
 
     // The Tetrominoes
-    const lTetromino = [
+    const jTetromino = [
         [1, width+1, width*2+1, 2],
         [width, width+1, width+2, width*2+2],
         [width*2, 1, width+1, width*2+1],
         [width, width*2, width*2+1, width*2+2],
+    ]
+
+    const lTetromino = [
+        [0, 1, width+1, width*2+1],
+        [width*2, width*2+1, width+2, width*2+2],
+        [1, width+1, width*2+1, width*2+2],
+        [width, width+1, width+2, width*2],
     ]
 
     const zTetromino = [
@@ -51,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 1, 2, 3],
     ]
 
-    const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+    const theTetrominoes = [jTetromino, lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
     let currentGridPosition = 4;
     let currentGridRotation = 0;
@@ -172,7 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // the tetrominoes without rotations
     const upNextTetrominoes = [
-        [1, displayWidth+1, displayWidth*2+1, 2], //lTetromino
+        [1, displayWidth+1, displayWidth*2+1, 2], //jTetromino
+        [0, 1, displayWidth+1, displayWidth*2+1], //lTetromino
         [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino
         [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
         [0, 1, displayWidth, displayWidth+1], //oTetromino
