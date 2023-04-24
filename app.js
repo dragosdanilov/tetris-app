@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'orange',
         'pink',
         'red',
+        'cyan',
         'purple',
         'green',
         'blue'
@@ -31,11 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
         [width, width+1, width+2, width*2],
     ]
 
+    const sTetromino = [
+        [width*2, width+1, width*2+1, width+2],
+        [0, width, width+1, width*2+1],
+        [width*2, width+1, width*2+1, width+2],
+        [0, width, width+1, width*2+1],
+    ]
+
     const zTetromino = [
-        [width*2, width+1, width*2+1, width+2],
-        [0, width, width+1, width*2+1],
-        [width*2, width+1, width*2+1, width+2],
-        [0, width, width+1, width*2+1],
+        [width, width+1, width*2+1, width*2+2],
+        [width+1, width*2+1, width+2, 2],
+        [width, width+1, width*2+1, width*2+2],
+        [width+1, width*2+1, width+2, 2],
     ]
 
     const tTetromino = [
@@ -59,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 1, 2, 3],
     ]
 
-    const theTetrominoes = [jTetromino, lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+    const theTetrominoes = [jTetromino, lTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
     let currentGridPosition = 4;
     let currentGridRotation = 0;
@@ -182,7 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const upNextTetrominoes = [
         [1, displayWidth+1, displayWidth*2+1, 2], //jTetromino
         [1, 2, displayWidth+2, displayWidth*2+2], //lTetromino
-        [1, displayWidth+1, displayWidth+2, displayWidth*2+2], //zTetromino
+        [1, displayWidth+1, displayWidth+2, displayWidth*2+2], //sTetromino
+        [displayWidth+1, displayWidth*2+1, displayWidth+2, 2], //zTetromino
         [1, displayWidth+1, displayWidth*2+1, displayWidth+2], //tTetromino
         [displayWidth+1, displayWidth+2, displayWidth*2+1, displayWidth*2+2], //oTetromino
         [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1], //iTetromino
