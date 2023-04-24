@@ -181,10 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // the tetrominoes without rotations
     const upNextTetrominoes = [
         [1, displayWidth+1, displayWidth*2+1, 2], //jTetromino
-        [0, 1, displayWidth+1, displayWidth*2+1], //lTetromino
-        [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino
-        [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
-        [0, 1, displayWidth, displayWidth+1], //oTetromino
+        [1, 2, displayWidth+2, displayWidth*2+2], //lTetromino
+        [1, displayWidth+1, displayWidth+2, displayWidth*2+2], //zTetromino
+        [1, displayWidth+1, displayWidth*2+1, displayWidth+2], //tTetromino
+        [displayWidth+1, displayWidth+2, displayWidth*2+1, displayWidth*2+2], //oTetromino
         [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1], //iTetromino
     ]
 
