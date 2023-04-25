@@ -1,3 +1,13 @@
+body {
+    background-color: rgb(233, 239, 230);
+}
+
+.tetris-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .container {
     display: flex;
 }
@@ -5,7 +15,6 @@
 .grid {
     width: 200px;
     height: 400px;
-    background-color: rgb(233, 239, 230);
     display: flex;
     flex-wrap: wrap;
 }
@@ -15,8 +24,34 @@
     width: 20px;
 }
 
+
+#scoreboard {
+    font-family: 'Tetris', sans-serif;
+    font-size: 30px;
+    color: rgb(30, 32, 29);
+}
+
+#start-button {
+    font-family: 'Tetris', sans-serif;
+    background-color: rgb(233, 239, 230);
+    border: transparent;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+#start-button:hover {
+    background-color: rgb(88, 107, 164);
+    color: rgb(233, 239, 230);
+    transition: 0.1s;
+    cursor: pointer;
+}
+
 .tetromino {
     background-color: blue;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
 }
 
 .mini-grid {
