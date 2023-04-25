@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerId;
     let score = 0;
     const colors = [
-        'orange',
-        'pink',
-        'red',
-        'cyan',
-        'purple',
-        'green',
-        'blue'
+        'rgb(238, 147, 68)', //orange
+        'rgb(214, 157, 154)', //pink
+        'rgb(191, 78, 74)', //red
+        'rgb(154, 166, 254)', //cyan
+        'rgb(101, 82, 142)', //purple
+        'rgb(92, 193, 126)', //green
+        'rgb(52, 138, 167)' //blue
     ]
 
     // The Tetrominoes
