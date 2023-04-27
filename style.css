@@ -30,9 +30,9 @@ body {
     width: 30px;
 }
 
-.grid div:not(.taken) {
+.grid div:not(.taken, .tetromino) {
     box-sizing: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.050);
+    border: 1px solid rgba(0, 0, 0, 0.040);
     border-radius: 7px;
 }
 
@@ -77,10 +77,10 @@ h3 {
 }
 
 .tetromino {
-    background-color: blue;
-    border-radius: 7px;
+    border-radius: 8px;
     box-sizing: border-box;
-    border: 1.5px solid rgba(233, 239, 230, 0.8);
+    border: 2px solid rgba(233, 239, 230, 0.5);
+    box-shadow: 10px;
 }
 
 .mini-grid {

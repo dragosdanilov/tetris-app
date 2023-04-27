@@ -170,6 +170,31 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
     }
 
+    // fix rotation of the tetrominoes at the edges
+    function isAtRight() {
+        return currentTetromino.some(index => (currentGridPosition + index + 1) % width === 0)
+    }
+
+    function isAtLeft() {
+        return currentTetromino.some(index => (currentGridPosition + index) % width === 0)
+    }
+
+    function checkRotatedPosition(P) {
+        P = P || currentGridPosition
+        if ((P+1) % width < 4) {
+            if (isAtRight()) {
+                currentGridPosition += 1
+                checkRotatedPosition(P)
+            }
+        }
+        else if (P % width > 5) {
+            if (isAtLeft()) {
+                currentGridPosition -= 1
+                checkRotatedPosition(P)
+            }
+        }
+    }
+
     // rotate the tetromino
     function rotate() {
         undraw()
@@ -178,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentGridRotation = 0
         }
         currentTetromino = theTetrominoes[random][currentGridRotation]
+        checkRotatedPosition()
         draw()
     }
 
@@ -217,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timerId = null;
         } else {
             draw()
-            timerId = setInterval(moveDown, 1000)
+            timerId = setInterval(moveDown, 700)
             nextRandom = Math.floor(Math.random()*theTetrominoes.length)
             displayShape()
         }
