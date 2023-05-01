@@ -237,7 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // add functionality to the button
-    startButton.addEventListener('click', () => {
+    function startPause() {
+    startButton.addEventListener('click' || e.keyCode === 32, () => {
         if (timerId) {
             clearInterval(timerId)
             timerId = null;
@@ -248,6 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
             displayShape()
         }
     })
+    }
+
+    startPause()
 
     function addScore() {
         for (let i = 0; i < 199; i += width) {
