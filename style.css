@@ -14,19 +14,54 @@ body {
 }
 
 .grid {
+    position: relative;
+    background: rgba(233, 239, 230, 0.8);
     width: 300px;
     height: 600px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    border: 6px solid;
+    /* border: solid; */
     border-top: none;
     border-color: rgba(233, 239, 230, 0.8);
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
-    padding: 0.9px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    box-shadow: rgba(233, 239, 230, 0.17) 0px -23px 25px 0px inset, rgba(233, 239, 230, 0.15) 0px -36px 30px 0px inset, rgba(233, 239, 230, 0.1) 0px -79px 40px 0px inset;
+    padding: 7px;
+    overflow: hidden;
+}
+
+.grid::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 700px;
+    background: linear-gradient(rgba(88, 107, 164, 0.8), rgba(88, 107, 164, 0.8));
+    animation: animate 12s linear infinite;
+}
+
+.grid::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    background: rgb(30, 32, 29);
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .grid div {
+    position: relative;
+    z-index: 10;
     height: 30px;
     width: 30px;
 }
@@ -46,6 +81,10 @@ h1, h3 {
     color: rgb(233, 239, 230);
 }
 
+#block {
+    color: rgba(88, 107, 164, 0.8);
+}
+
 h1 {
     font-size: 80px;
     margin-bottom: 0;
@@ -62,30 +101,85 @@ h3 {
     padding: 37px;
     border: 6px solid;
     border-top: none;
-    border-color: rgba(88, 107, 164, 0.8);
+    /* border-color: rgba(88, 107, 164, 0.8); */
+    border-color: rgba(233, 239, 230, 0.8);
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
+    box-shadow: rgba(88, 107, 164, 0.8) 0px -50px 36px -28px inset;
 }
 
 #start-button {
+    background-color: var(--background-color);
+    position: relative;
     font-size: 25px;
     font-family: 'Tetris', sans-serif;
     color: rgb(233, 239, 230);
-    background-color: rgb(30, 32, 29);
-    border: transparent;
+    border: solid transparent;
+    outline: none;
     margin-bottom: 40px;
     margin-top: 0;
     border-radius: 6px;
     padding: 4px;
     padding-left: 10px;
     padding-right: 10px;
+    cursor: pointer;
+    --border-size: 4px;
+    --background-color: rgba(88, 107, 164);
+    --white-color: rgba(233, 239, 230, 0.8)
 }
 
-#start-button:hover {
-    background-color: rgb(88, 107, 164);
-    color: rgb(30, 32, 29);
+#start-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border: var(--border-size) solid var(--white-color);
+    border-radius: 10px;
+    transition: top, left, right, bottom, 100ms ease-in-out;
+}
+
+#start-button:hover::before, 
+#start-button:focus::before {
+    top: calc(var(--border-size) * -3);
+    left: calc(var(--border-size) * -3);
+    right: calc(var(--border-size) * -3);
+    bottom: calc(var(--border-size) * -3);
+}
+
+#start-button:focus::before {
+    border-color: var(--background-color);
+}
+
+#start-button:hover,
+#start-button:focus {
+    background-color: rgb(30, 32, 29);
+    border-color: transparent;
     transition: 0.1s;
     cursor: pointer;
+    transition: 120ms ease-out;
+} 
+
+#start-button:hover {
+    color: var(--white-color);
+}
+
+#start-button:focus {
+    color: var(--background-color);
+}
+
+#start-button:not(:focus) {
+    transition: 100ms ease-out;
+}
+
+#start-button:active::before {
+    border-color: white;
+}
+
+#start-button:active {
+    color: white;
 }
 
 .tetromino {
@@ -96,7 +190,7 @@ h3 {
 }
 
 .mini-grid {
-    margin-left: 50px;
+    margin-left: 100px;
     width: 180px;
     height: 210px; 
     display: flex;
@@ -105,7 +199,8 @@ h3 {
     background-color: rgb(30, 32, 29);
     border: 6px solid;
     border-bottom: none;
-    border-color: rgb(88, 107, 164, 0.8);
+    /* border-color: rgb(88, 107, 164, 0.8); */
+    border-color: rgb(233, 239, 230, 0.8);
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
 }
